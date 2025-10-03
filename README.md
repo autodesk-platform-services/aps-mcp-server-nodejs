@@ -11,38 +11,57 @@ Simple [Model Context Protocol](https://modelcontextprotocol.io) server built wi
 ### Prerequisites
 
 - [Node.js](https://nodejs.org)
-- [APS app credentials](https://aps.autodesk.com/en/docs/oauth/v2/tutorials/create-app) (must be a _Server-to-Server_ application type)
-- [Provisioned access to ACC or BIM360](https://get-started.aps.autodesk.com/#provision-access-in-other-products)
+- [APS application](https://aps.autodesk.com/en/docs/oauth/v2/tutorials/create-app) (must be of type _Server-to-Server_)
+- [Provisioned access to ACC](https://get-started.aps.autodesk.com/#provision-access-in-other-products)
 
 ### Setup
+
+#### Secure Service Account
+
+Our MCP server will need a secure service account and a private key. Instead of implementing the logic in this code sample, we will use https://ssa-manager.autodesk.io:
+
+- Go to https://ssa-manager.autodesk.io, and log in with your APS client ID and secret
+- Create a new secure service account using the _Create Account With Name:_ button; don't forget to specify the first name and last name
+- Make sure the new account is selected in the _Accounts_ list
+- Make note of the `serviceAccountId` and `email` values under _Account Details_
+- Create a new private key using the _Create Key_ button; a _*.pem_ file will be automatically downloaded to your machine
+- Make sure the new private key is selected in the _Keys_ list
+- Make note of the `kid` value under _Key Details_
+
+#### Autodesk Construction Cloud
+
+- Make sure you've provisioned access to ACC for your APS application
+- Invite the secure service account (the `email` value from earlier) as a new member to your selected ACC projects
 
 #### Server
 
 - Clone this repository
 - Install dependencies: `yarn install`
-- Create a _.env_ file in the root folder of this project, and add your APS credentials:
+- Create a _.env_ file in the root folder of this project, and define the following environment variables:
   - `APS_CLIENT_ID` - your APS application client ID
   - `APS_CLIENT_SECRET` - your APS application client secret
-- Create a new service account: `node scripts/create-service-account <username> <first name> <last name>`, for example, `node scripts/create-service-account ssa-test-user John Doe`
-  - This script will output a bunch of environment variables with information about the new account:
-    - `APS_SA_ID` -  your service account ID
-    - `APS_SA_EMAIL` - your service account email
-    - `APS_SA_KEY_ID` - your service account key ID
-    - `APS_SA_PRIVATE_KEY` - your service account private key
-- Add these environment variables to your _.env_ file
+  - `SSA_ID` -  your service account ID (the `serviceAccountId` field from earlier)
+  - `SSA_KEY_ID` - your private key ID (the `kid` field from earlier)
+  - `SSA_KEY_PATH` - full path to your downloaded *.pem file
+- The _.env_ file might look something like this:
 
-#### Autodesk Construction Cloud
+```bash
+APS_CLIENT_ID="AhH9..."
+APS_CLIENT_SECRET="1FS4..."
+SSA_ID="ZCU2TJH5PK8A5KQ9"
+SSA_KEY_ID="8a4ee790-3378-44f3-bbab-5acb35ec35ce"
+SSA_KEY_PATH="/Users/brozp/aps-mcp-server-nodejs/8a4ee790-3378-44f3-bbab-5acb35ec35ce.pem"
+```
 
-- Register your APS application client ID as a custom integration
-- Invite the service account email as a new member to your ACC project(s)
+## Usage
 
-### Use with Inspector
+### MCP Inspector
 
 - Run the [Model Context Protocol Inspector](https://modelcontextprotocol.io/docs/tools/inspector): `yarn run inspect`
 - Open http://localhost:5173
-- Hit `Connect` to start this MCP server and connect to it
+- Hit `Connect` to connect to the MCP server
 
-### Use with Claude Desktop
+### Claude Desktop
 
 - Make sure you have [Claude Desktop](https://claude.ai/download) installed
 - Create a Claude Desktop config file if you don't have one yet:
@@ -69,7 +88,7 @@ Simple [Model Context Protocol](https://modelcontextprotocol.io) server built wi
 
 > For more details on how to add MCP servers to Claude Desktop, see the [official documentation](https://modelcontextprotocol.io/quickstart/user).
 
-### Use with Visual Studio Code & Copilot
+### Visual Studio Code & GitHub Copilot
 
 - Make sure you have [enabled MCP servers in Visual Studio Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_enable-mcp-support-in-vs-code)
 - Create _.vscode/mcp.json_ file in your workspace, and add the following JSON to it:
@@ -90,7 +109,7 @@ Simple [Model Context Protocol](https://modelcontextprotocol.io) server built wi
 
 > For more details on how to add MCP servers to Visual Studio Code, see the [documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
 
-### Use with Cursor
+### Cursor
 
 - Create _.cursor/mcp.json_ file in your workspace, and add the following JSON to it:
 

@@ -9,7 +9,6 @@
     "inspect": "mcp-inspector node ./server.js"
   },
   "dependencies": {
-    "@aps_sdk/authentication": "^1.0.0",
     "@aps_sdk/construction-issues": "^1.1.0",
     "@aps_sdk/data-management": "^1.0.1",
     "@modelcontextprotocol/sdk": "^1.7.0",
