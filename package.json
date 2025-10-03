@@ -1,0 +1,23 @@
+{
+  "name": "aps-mcp-server-nodejs",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "description": "Simple Model Context Protocol server built with Node.js, providing access to Autodesk Platform Services API, with fine-grained access control using Secure Service Accounts.",
+  "author": "Petr Broz <petr.broz@autodesk.com>",
+  "scripts": {
+    "inspect": "mcp-inspector node ./server.js"
+  },
+  "dependencies": {
+    "@aps_sdk/authentication": "^1.0.0",
+    "@aps_sdk/construction-issues": "^1.1.0",
+    "@aps_sdk/data-management": "^1.0.1",
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.6.0"
+  }
+}

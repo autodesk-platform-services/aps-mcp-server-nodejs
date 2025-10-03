@@ -1,0 +1,12 @@
+{
+	"servers": {
+		"aps-mcp-server-nodejs": {
+			"type": "stdio",
+			"command": "node",
+			"args": [
+				"server.js"
+			]
+		}
+	},
+	"inputs": []
+}
