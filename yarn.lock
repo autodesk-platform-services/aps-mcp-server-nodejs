@@ -2,15 +2,6 @@
 # yarn lockfile v1
 
 
-"@aps_sdk/authentication@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@aps_sdk/authentication/-/authentication-1.0.0.tgz"
-  integrity sha512-nCRi0UCw1UKQAg1jZj8SOvZJU75rQgUVDjvljhvaKXlwol8+KHxl2qNHINOzCaJUyi8FW/QRqlaqSzWDyuY0lw==
-  dependencies:
-    "@aps_sdk/autodesk-sdkmanager" "^1.0.0"
-    "@types/node" "^20.9.0"
-    axios "^1.7.8"
-
 "@aps_sdk/autodesk-sdkmanager@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@aps_sdk/autodesk-sdkmanager/-/autodesk-sdkmanager-1.0.0.tgz"
