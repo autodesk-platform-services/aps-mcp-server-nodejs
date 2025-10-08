@@ -1,21 +1,21 @@
-import { DataManagementClient } from "@aps_sdk/data-management";
-import { getAccessToken } from "./common.js";
+import { dataManagementClient } from "./common.js";
 
 export const getAccounts = {
     title: "get-accounts",
-    description: "List all available Autodesk Construction Cloud accounts",
+    description: `
+        Retrieves all Autodesk Construction Cloud (ACC) accounts accessible to the configured service account.
+        Returns the list of accounts with their IDs and names.
+    `,
     schema: {},
     callback: async () => {
-        const accessToken = await getAccessToken(["data:read"]);
-        const dataManagementClient = new DataManagementClient();
-        const hubs = await dataManagementClient.getHubs({ accessToken });
-        if (!hubs.data) {
-            throw new Error("No accounts found");
-        }
+        const hubs = await dataManagementClient.getHubs();
         return {
-            content: hubs.data.map((hub) => ({
+            content: (hubs.data || []).map((hub) => ({
                 type: "text",
-                text: JSON.stringify({ id: hub.id, name: hub.attributes?.name })
+                text: JSON.stringify({
+                    id: hub.id,
+                    name: hub.attributes.name
+                })
             }))
         };
     }

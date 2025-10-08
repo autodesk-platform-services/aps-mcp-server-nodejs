@@ -1,23 +1,29 @@
 import { z } from "zod";
-import { IssuesClient } from "@aps_sdk/construction-issues";
-import { getAccessToken } from "./common.js";
+import { issuesClient } from "./common.js";
 
 export const getIssueTypes = {
     title: "get-issue-types",
-    description: "List all issue types in an Autodesk Construction Cloud project",
+    description: `
+        Retrieves all configured issue types available in an Autodesk Construction Cloud (ACC) project.
+        Requires a projectId parameter. Returns the list of issue types with their IDs, titles, and subtypes.
+    `,
     schema: {
         projectId: z.string().nonempty()
     },
     callback: async ({ projectId }) => {
-        const accessToken = await getAccessToken(["data:read"]);
-        const issuesClient = new IssuesClient();
-        projectId = projectId.replace("b.", ""); // the projectId should not contain the "b." prefix
-        const issueTypes = await issuesClient.getIssuesTypes(projectId, { accessToken });
-        if (!issueTypes.results) {
-            throw new Error("No issue types found");
-        }
+        const issueTypes = await issuesClient.getIssuesTypes(projectId.replace("b.", ""), { include: "subtypes"});
         return {
-            content: issueTypes.results.map((issue) => ({ type: "text", text: JSON.stringify(issue) }))
+            content: (issueTypes.results || []).map((issueType) => ({
+                type: "text",
+                text: JSON.stringify({
+                    id: issueType.id,
+                    title: issueType.title,
+                    subtypes: issueType.subtypes.map((subtype) => ({
+                        id: subtype.id,
+                        title: subtype.title
+                    }))
+                })
+            }))
         };
     }
 };

@@ -1,23 +1,29 @@
 import { z } from "zod";
-import { IssuesClient } from "@aps_sdk/construction-issues";
-import { getAccessToken } from "./common.js";
+import { issuesClient } from "./common.js";
 
 export const getIssues = {
     title: "get-issues",
-    description: "List all available projects in an Autodesk Construction Cloud account",
+    description: `
+        Retrieves all issues within an Autodesk Construction Cloud (ACC) project. Requires a projectId parameter.
+        Returns the list of issues with their IDs, titles, statuses, and issue type IDs.
+    `,
     schema: {
         projectId: z.string().nonempty()
     },
     callback: async ({ projectId }) => {
-        const accessToken = await getAccessToken(["data:read"]);
-        const issuesClient = new IssuesClient();
-        projectId = projectId.replace("b.", ""); // the projectId should not contain the "b." prefix
-        const issues = await issuesClient.getIssues(projectId, { accessToken });
-        if (!issues.results) {
-            throw new Error("No issues found");
-        }
+        const issues = await issuesClient.getIssues(projectId.replace("b.", ""));
         return {
-            content: issues.results.map((issue) => ({ type: "text", text: JSON.stringify(issue) }))
+            content: (issues.results || []).map((issue) => ({
+                type: "text",
+                text: JSON.stringify({
+                    id: issue.id,
+                    title: issue.title,
+                    status: issue.status,
+                    description: issue.description,
+                    issueTypeId: issue.issueTypeId,
+                    issueSubtypeId: issue.issueSubtypeId
+                })
+            }))
         };
     }
 };
