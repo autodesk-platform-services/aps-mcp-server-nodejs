@@ -16,11 +16,11 @@ function createAssertion(clientId, serviceAccountId, serviceAccountKeyId, servic
         exp: Math.floor(Date.now() / 1000) + 300, // 5 minutes
         scope: scopes
     };
-    const options = {
+    return jwt.sign(payload, serviceAccountPrivateKey, {
         algorithm: "RS256",
-        header: { alg: "RS256", kid: serviceAccountKeyId }
-    };
-    return jwt.sign(payload, serviceAccountPrivateKey, options);
+        header: { alg: "RS256", kid: serviceAccountKeyId },
+        noTimestamp: true
+    });
 }
 
 async function getAccessToken(clientId, clientSecret, grantType, scopes, assertion) {
