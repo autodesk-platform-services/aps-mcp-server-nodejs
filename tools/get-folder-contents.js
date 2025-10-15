@@ -14,11 +14,12 @@ export const getFolderContents = {
         folderId: z.string().optional()
     },
     callback: async ({ accountId, projectId, folderId }) => {
-        const contents = folderId
+        const response = folderId
             ? await dataManagementClient.getFolderContents(projectId, folderId)
             : await dataManagementClient.getProjectTopFolders(accountId, projectId);
+        const contents = response.data || [];
         return {
-            content: (contents.data || []).map((item) => ({
+            content: contents.map((item) => ({
                 type: "text",
                 text: JSON.stringify({
                     id: item.id,

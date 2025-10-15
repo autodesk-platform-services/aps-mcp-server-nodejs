@@ -11,9 +11,10 @@ export const getIssueTypes = {
         projectId: z.string().nonempty()
     },
     callback: async ({ projectId }) => {
-        const issueTypes = await issuesClient.getIssuesTypes(projectId.replace("b.", ""), { include: "subtypes"});
+        const response = await issuesClient.getIssuesTypes(projectId.replace("b.", ""), { include: "subtypes"});
+        const issueTypes = response.results || [];
         return {
-            content: (issueTypes.results || []).map((issueType) => ({
+            content: issueTypes.map((issueType) => ({
                 type: "text",
                 text: JSON.stringify({
                     id: issueType.id,

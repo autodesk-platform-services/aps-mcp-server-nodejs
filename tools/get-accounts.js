@@ -8,9 +8,10 @@ export const getAccounts = {
     `,
     schema: {},
     callback: async () => {
-        const hubs = await dataManagementClient.getHubs();
+        const response = await dataManagementClient.getHubs();
+        const hubs = response.data || [];
         return {
-            content: (hubs.data || []).map((hub) => ({
+            content: hubs.map((hub) => ({
                 type: "text",
                 text: JSON.stringify({
                     id: hub.id,

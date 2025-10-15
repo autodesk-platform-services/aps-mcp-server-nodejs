@@ -12,9 +12,10 @@ export const getProjects = {
         accountId: z.string().nonempty()
     },
     callback: async ({ accountId }) => {
-        const projects = await dataManagementClient.getHubProjects(accountId);
+        const response = await dataManagementClient.getHubProjects(accountId);
+        const projects = response.data || [];
         return {
-            content: (projects.data || []).map((project) => ({
+            content: projects.map((project) => ({
                 type: "text",
                 text: JSON.stringify({
                     id: project.id,

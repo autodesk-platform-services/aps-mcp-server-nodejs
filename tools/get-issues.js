@@ -11,9 +11,10 @@ export const getIssues = {
         projectId: z.string().nonempty()
     },
     callback: async ({ projectId }) => {
-        const issues = await issuesClient.getIssues(projectId.replace("b.", ""));
+        const response = await issuesClient.getIssues(projectId.replace("b.", ""));
+        const issues = response.results || [];
         return {
-            content: (issues.results || []).map((issue) => ({
+            content: issues.map((issue) => ({
                 type: "text",
                 text: JSON.stringify({
                     id: issue.id,
