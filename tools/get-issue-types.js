@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { issuesClient } from "./common.js";
+import { issuesClient } from "../utils.js";
 
 export const getIssueTypes = {
     title: "get-issue-types",

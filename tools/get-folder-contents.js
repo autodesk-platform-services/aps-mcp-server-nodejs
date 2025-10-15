@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { dataManagementClient } from "./common.js";
+import { dataManagementClient } from "../utils.js";
 
 export const getFolderContents = {
     title: "get-folder-contents",

@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import jwt from "jsonwebtoken";
 import { DataManagementClient } from "@aps_sdk/data-management";
 import { IssuesClient } from "@aps_sdk/construction-issues";
-import { APS_CLIENT_ID, APS_CLIENT_SECRET, SSA_ID, SSA_KEY_ID, SSA_KEY_PATH } from "../config.js";
+import { APS_CLIENT_ID, APS_CLIENT_SECRET, SSA_ID, SSA_KEY_ID, SSA_KEY_PATH } from "./config.js";
 
 const TOKEN_ENDPOINT = "https://developer.api.autodesk.com/authentication/v2/token";
 

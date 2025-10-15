@@ -1,4 +1,4 @@
-import { dataManagementClient } from "./common.js";
+import { dataManagementClient } from "../utils.js";
 
 export const getAccounts = {
     title: "get-accounts",
