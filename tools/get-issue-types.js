@@ -11,8 +11,7 @@ export const getIssueTypes = {
         projectId: z.string().nonempty()
     },
     callback: async ({ projectId }) => {
-        const response = await issuesClient.getIssuesTypes(projectId.replace("b.", ""), { include: "subtypes"});
-        const issueTypes = response.results || [];
+        const issueTypes = await issuesClient.getIssuesTypes(projectId.replace("b.", ""), { include: "subtypes" }).then(res => res.results || []);
         return {
             content: issueTypes.map((issueType) => ({
                 type: "text",

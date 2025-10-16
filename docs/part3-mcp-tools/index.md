@@ -17,12 +17,11 @@ export const getProjects = {
     title: "get-projects",
     description: `
         Retrieves all Autodesk Construction Cloud (ACC) accounts and their associated projects accessible to the configured service account.
-        Returns a structured list of accounts with their IDs, names, and associated projects (with project IDs and names).
+        Returns a structured list of accounts (with account IDs and names) and associated projects (with project IDs and names).
     `,
     schema: {},
     callback: async ({}) => {
-        const response = await dataManagementClient.getHubs();
-        const hubs = response.data || [];
+        const hubs = await dataManagementClient.getHubs().then(res => res.data || []);
         const projects = await Promise.all(hubs.map(hub => dataManagementClient.getHubProjects(hub.id).then(res => res.data || [])));
         const results = {
             accounts: hubs.map((hub, i) => ({
@@ -77,10 +76,9 @@ export const getFolderContents = {
         folderId: z.string().optional()
     },
     callback: async ({ accountId, projectId, folderId }) => {
-        const response = folderId
-            ? await dataManagementClient.getFolderContents(projectId, folderId)
-            : await dataManagementClient.getProjectTopFolders(accountId, projectId);
-        const contents = response.data || [];
+        const contents = folderId
+            ? await dataManagementClient.getFolderContents(projectId, folderId).then(res => res.data || [])
+            : await dataManagementClient.getProjectTopFolders(accountId, projectId).then(res => res.data || []);
         return {
             content: contents.map((item) => ({
                 type: "text",
@@ -125,8 +123,7 @@ export const getIssues = {
         projectId: z.string().nonempty()
     },
     callback: async ({ projectId }) => {
-        const response = await issuesClient.getIssues(projectId.replace("b.", ""));
-        const issues = response.results || [];
+        const issues = await issuesClient.getIssues(projectId.replace("b.", "")).then(res => res.results || []);
         return {
             content: issues.map((issue) => ({
                 type: "text",
@@ -174,8 +171,7 @@ export const getIssueTypes = {
         projectId: z.string().nonempty()
     },
     callback: async ({ projectId }) => {
-        const response = await issuesClient.getIssuesTypes(projectId.replace("b.", ""), { include: "subtypes"});
-        const issueTypes = response.results || [];
+        const issueTypes = await issuesClient.getIssuesTypes(projectId.replace("b.", ""), { include: "subtypes" }).then(res => res.results || []);
         return {
             content: issueTypes.map((issueType) => ({
                 type: "text",

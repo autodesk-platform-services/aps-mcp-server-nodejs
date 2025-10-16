@@ -14,10 +14,9 @@ export const getFolderContents = {
         folderId: z.string().optional()
     },
     callback: async ({ accountId, projectId, folderId }) => {
-        const response = folderId
-            ? await dataManagementClient.getFolderContents(projectId, folderId)
-            : await dataManagementClient.getProjectTopFolders(accountId, projectId);
-        const contents = response.data || [];
+        const contents = folderId
+            ? await dataManagementClient.getFolderContents(projectId, folderId).then(res => res.data || [])
+            : await dataManagementClient.getProjectTopFolders(accountId, projectId).then(res => res.data || []);
         return {
             content: contents.map((item) => ({
                 type: "text",
