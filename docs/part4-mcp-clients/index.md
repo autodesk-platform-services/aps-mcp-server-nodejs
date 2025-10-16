@@ -78,7 +78,7 @@ Cursor uses a similar configuration approach to VS Code but with its own setting
 ### Test MCP Server in Cursor
 
 - Open the root folder of this project in Cursor
-- Go to **Cursor Settings** > **Tools & MCP**, and make sure that the `aps-mcp-server` MCP server is enabled
+- Go to **Cursor Settings** > **Tools & MCP**, and make sure that the `aps-mcp-server-nodejs` MCP server is enabled
 
 ![Cursor settings](images/cursor-settings.png)
 

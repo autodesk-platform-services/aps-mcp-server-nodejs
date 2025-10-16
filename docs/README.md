@@ -40,7 +40,7 @@ Before starting this tutorial, you should have:
 - **Node.js** installed on your machine (version 16 or higher)
 - An **APS application** (must be of type _Server-to-Server_)
   - See how to [create an app](https://aps.autodesk.com/en/docs/oauth/v2/tutorials/create-app)
-- **Provisioned access to ACC** for your APS application (**TODO: this may not be needed!**)
+- **Provisioned access to ACC** for your APS application
   - Follow the [provisioning guide](https://get-started.aps.autodesk.com/#provision-access-in-other-products)
 - Basic knowledge of JavaScript/Node.js
 - An AI client that supports MCP (we'll test with Claude Desktop and VS Code)

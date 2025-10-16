@@ -57,8 +57,7 @@ SSA_KEY_PATH="/Users/brozp/aps-mcp-server-nodejs/8a4ee790-3378-44f3-bbab-5acb35e
 
 ### MCP Inspector
 
-- Run the [Model Context Protocol Inspector](https://modelcontextprotocol.io/docs/tools/inspector): `yarn run inspect`
-- Open http://localhost:5173
+- Run the [Model Context Protocol Inspector](https://modelcontextprotocol.io/docs/tools/inspector): `npx @modelcontextprotocol/inspector`
 - Hit `Connect` to connect to the MCP server
 
 ### Claude Desktop
@@ -72,10 +71,10 @@ SSA_KEY_PATH="/Users/brozp/aps-mcp-server-nodejs/8a4ee790-3378-44f3-bbab-5acb35e
 ```json
 {
     "mcpServers": {
-        "autodesk-platform-services": {
+        "aps-mcp-server-nodejs": {
             "command": "node",
             "args": [
-                "/absolute/path/to/aps-mcp-server/server.js"
+                "/path/to/aps-mcp-server-nodejs/server.js"
             ]
         }
     }
@@ -96,11 +95,11 @@ SSA_KEY_PATH="/Users/brozp/aps-mcp-server-nodejs/8a4ee790-3378-44f3-bbab-5acb35e
 ```json
 {
     "servers": {
-        "Autodesk Platform Services": {
+        "aps-mcp-server-nodejs": {
             "type": "stdio",
             "command": "node",
             "args": [
-                "/absolute/path/to/aps-mcp-server/server.js"
+                "/path/to/aps-mcp-server-nodejs/server.js"
             ]
         }
     }
@@ -116,10 +115,10 @@ SSA_KEY_PATH="/Users/brozp/aps-mcp-server-nodejs/8a4ee790-3378-44f3-bbab-5acb35e
 ```json
 {
   "mcpServers": {
-    "Autodesk Platform Services": {
+    "aps-mcp-server-nodejs": {
       "command": "node",
       "args": [
-        "/Users/brozp/Code/Temp/aps-mcp-server-node/server.js"
+        "/path/to/aps-mcp-server-nodejs/server.js"
       ]
     }
   }
