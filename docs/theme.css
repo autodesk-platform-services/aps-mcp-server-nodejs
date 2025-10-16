@@ -55,8 +55,31 @@
 }
 
 :root {
-    --theme-color: #ff0;
+    /* Accent/Theme Colors */
+    --theme-color: #666666;
+    
+    /* Background Colors */
+    --base-background-color: #ffffff;
+    --sidebar-background: #000000;
+    --cover-background-color: #ffffff;
+    
+    /* Text Colors */
+    --base-color: #000000;
+    --heading-color: #000000;
+    --sidebar-name-color: #ffffff;
+    --sidebar-nav-link-color--active: #ffff00;
+    --sidebar-nav-link-color--hover: #ffff00;
+    --sidebar-nav-link-color: #ffffff;
+    
+    /* Link Colors */
+    --link-color: #666666;
+    
+    /* Code Colors */
+    --code-theme-background: #f5f5f5;
+    --code-theme-text: #000000;
+    
+    /* Font Settings */
     --base-font-family: 'ArtifaktElement';
     --sidebar-width: 20rem;
-    --sidebar-name-font-weight: 800;
+    --sidebar-name-font-weight: 700;
 }
