@@ -1,4 +1,4 @@
-# Part 1: Prerequisites
+# Part 1: Prepare Service Account
 
 In this part of the tutorial you will:
 

@@ -94,7 +94,7 @@ SSA_KEY_ID="your-key-id"
 SSA_KEY_PATH="/absolute/path/to/your-key.pem"
 ```
 
-> Replace the placeholders with your actual values collected in [Part 1](../part1-prerequisites/index.md).
+> Replace the placeholders with your actual values collected in [Part 1](../part1-service-account/index.md).
 
 ### Create Configuration Module
 
