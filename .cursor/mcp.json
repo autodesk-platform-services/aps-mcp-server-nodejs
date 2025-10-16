@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "aps-mcp-server-nodejs": {
+      "command": "node",
+      "args": [
+        "server.js"
+      ]
+    }
+  }
+}

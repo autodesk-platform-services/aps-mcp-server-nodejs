@@ -1,0 +1,5 @@
+* [Overview](README.md)
+* [Part 1: Prepare Service Account](part1-service-account/index.md)
+* [Part 2: Create MCP Server](part2-mcp-server/index.md)
+* [Part 3: Create MCP Tools](part3-mcp-tools/index.md)
+* [Part 4: Integrate with MCP Clients](part4-mcp-clients/index.md)
