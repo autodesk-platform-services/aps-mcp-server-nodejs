@@ -1,4 +1,3 @@
-export { getAccounts } from "./get-accounts.js";
 export { getProjects } from "./get-projects.js";
 export { getFolderContents } from "./get-folder-contents.js";
 export { getIssues } from "./get-issues.js";

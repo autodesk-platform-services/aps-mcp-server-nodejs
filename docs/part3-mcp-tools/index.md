@@ -2,83 +2,43 @@
 
 In this part of the tutorial you will implement individual tools for our MCP server, and test them out.
 
-## Get Accounts
-
-The first tool we will implement is the **Get Accounts** tool. This tool will return a list of accounts that the authenticated user has access to.
-
-### Implement Get Accounts Tool
-
-Create `tools/get-accounts.js` with the following code:
-
-```javascript
-import { dataManagementClient } from "../utils.js";
-
-export const getAccounts = {
-    title: "get-accounts",
-    description: `
-        Retrieves all Autodesk Construction Cloud (ACC) accounts accessible to the configured service account.
-        Returns the list of accounts with their IDs and names.
-    `,
-    schema: {},
-    callback: async () => {
-        const response = await dataManagementClient.getHubs();
-        const hubs = response.data || [];
-        return {
-            content: hubs.map((hub) => ({
-                type: "text",
-                text: JSON.stringify({
-                    id: hub.id,
-                    name: hub.attributes.name
-                })
-            }))
-        };
-    }
-};
-```
-
-### Add Get Accounts Tool to Index
-
-Add the following line of code to `tools/index.js`:
-
-```javascript
-export { getAccounts } from "./get-accounts.js";
-```
-
-This will make sure that the tool is registered when the server starts.
-
 ## Get Projects
 
-Next, we will implement the **Get Projects** tool. This tool will return a list of projects for a given account.
+First, we will implement the **Get Projects** tool. This tool will return a list of hubs and projects the service account has access to.
 
 ### Implement Get Projects Tool
 
 Create `tools/get-projects.js` with the following code:
 
 ```javascript
-import { z } from "zod";
 import { dataManagementClient } from "../utils.js";
 
 export const getProjects = {
     title: "get-projects",
     description: `
-        Retrieves all projects within a specified Autodesk Construction Cloud (ACC) account.
-        Requires an accountId parameter. Returns project IDs and names that can be used to access
-        project-specific data such as folders, documents, and issues.
+        Retrieves all Autodesk Construction Cloud (ACC) accounts and their associated projects accessible to the configured service account.
+        Returns a structured list of accounts with their IDs, names, and associated projects (with project IDs and names).
     `,
-    schema: {
-        accountId: z.string().nonempty()
-    },
-    callback: async ({ accountId }) => {
-        const response = await dataManagementClient.getHubProjects(accountId);
-        const projects = response.data || [];
-        return {
-            content: projects.map((project) => ({
-                type: "text",
-                text: JSON.stringify({
+    schema: {},
+    callback: async ({}) => {
+        const response = await dataManagementClient.getHubs();
+        const hubs = response.data || [];
+        const projects = await Promise.all(hubs.map(hub => dataManagementClient.getHubProjects(hub.id).then(res => res.data || [])));
+        const results = {
+            accounts: hubs.map((hub, i) => ({
+                id: hub.id,
+                name: hub.attributes.name,
+                projects: projects[i].map(project => ({
                     id: project.id,
                     name: project.attributes.name
-                })
+                }))
             }))
+        };
+        return {
+            content: [{
+                type: "text",
+                text: JSON.stringify(results, null, 2)
+            }]
         };
     }
 };
@@ -269,13 +229,13 @@ This time, we should be able to get a list of tools exposed by our MCP server, a
 
 ![MCP Inspector - List Tools](images/mcp-inspector-list-tools.png)
 
-As a result, the UI should list tools such as `get-accounts`, `get-folder-contents`, `get-issue-types`, etc.
+As a result, the UI should list tools such as `get-projects`, `get-folder-contents`, `get-issue-types`, etc.
 
 ![MCP Inspector - List Tools Result](images/mcp-inspector-list-tools-result.png)
 
-### Test Get Accounts Tool
+### Test Get Projects Tool
 
-Now, let's try the tool for listing ACC hubs that our service account has access to. Select the **get-accounts** tool, and click **Run**.
+Now, let's try the tool for listing ACC hubs that our service account has access to. Select the **get-projects** tool, and click **Run**.
 
 ![MCP Inspector - Run Tool](images/mcp-inspector-run-tool.png)
 

@@ -20,11 +20,10 @@ Instead of building custom integrations for each AI assistant (Claude, ChatGPT, 
 
 In this tutorial, you'll implement an MCP server that exposes the following tools to AI assistants:
 
-1. **get-accounts** - Retrieve all ACC accounts accessible to your service account
-2. **get-projects** - List all projects within a specific ACC account
-3. **get-folder-contents** - Browse folders and files in an ACC project
-4. **get-issues** - List all issues in an ACC project
-5. **get-issue-types** - Retrieve available issue types for a project
+1. **get-projects** - Retrieve all ACC accounts and projects accessible to your service account
+2. **get-folder-contents** - Browse folders and files in an ACC project
+3. **get-issues** - List all issues in an ACC project
+4. **get-issue-types** - Retrieve available issue types for a project
 
 These tools enable AI assistants to:
 
