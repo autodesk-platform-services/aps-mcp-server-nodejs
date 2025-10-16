@@ -2,7 +2,7 @@
 
 This tutorial guides you through the process of implementing and testing a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server for [Autodesk Platform Services](https://aps.autodesk.com). By the end of the tutorial, you'll have a fully functioning MCP server that provides AI assistants with access to Autodesk Construction Cloud (ACC) data, including projects, folders, files, and issues.
 
-![MCP Server Screenshot](../screenshot.png)
+![Screenshot](screenshot.png)
 
 > Tip: if you don't want to build the project from scratch, the complete implementation is available on GitHub: [https://github.com/autodesk-platform-services/aps-mcp-server-nodejs](https://github.com/autodesk-platform-services/aps-mcp-server-nodejs).
 
