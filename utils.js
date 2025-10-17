@@ -50,6 +50,6 @@ class ServiceAccountAuthenticationProvider {
     }
 }
 
-const serviceAccountAuthenticationProvider = new ServiceAccountAuthenticationProvider(["data:read"]);
+const serviceAccountAuthenticationProvider = new ServiceAccountAuthenticationProvider(["data:read", "data:write"]);
 export const dataManagementClient = new DataManagementClient({ authenticationProvider: serviceAccountAuthenticationProvider });
 export const issuesClient = new IssuesClient({ authenticationProvider: serviceAccountAuthenticationProvider });
