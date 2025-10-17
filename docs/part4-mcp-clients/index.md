@@ -1,6 +1,6 @@
 # Part 4: Integrate with MCP Clients
 
-In this part of the tutorial you will learn how to integrate your MCP server with various AI-powered development tools that support the Model Context Protocol (MCP).
+In this final part of the tutorial you will learn how to integrate your MCP server with various AI-powered development tools that support the Model Context Protocol.
 
 We'll cover integration with:
 
@@ -46,7 +46,9 @@ GitHub Copilot in VS Code supports MCP servers, allowing you to extend Copilot's
 - Open GitHub Copilot Chat
   - Click the **Toggle Chat** icon next to the search bar at the top of the window, or
   - Press `Cmd+Shift+I` (macOS) or `Ctrl+Shift+I` (Windows/Linux)
-- Try various prompts listed at the end of this page
+- Try some of the [example prompts](#example-prompts) listed at the end of this page
+
+![VS Code example prompt](images/vscode-example-prompt.png)
 
 ## Cursor
 
@@ -60,7 +62,7 @@ Cursor is an AI-first code editor built on VS Code with enhanced AI capabilities
 
 Cursor uses a similar configuration approach to VS Code but with its own settings file.
 
-- Create _.cursor/mcp.json_ file in your workspace, and add the following JSON to it:
+- Create `.cursor/mcp.json` file in your workspace, and add the following JSON to it:
 
 ```json
 {
@@ -83,7 +85,7 @@ Cursor uses a similar configuration approach to VS Code but with its own setting
 ![Cursor settings](images/cursor-settings.png)
 
 - Open the **AI Pane**
-- Try various prompts listed at the end of this page
+- Try some of the [example prompts](#example-prompts) listed at the end of this page
 
 ![Cursor AI pane](images/cursor-ai-pane.png)
 
@@ -128,7 +130,7 @@ If the file doesn't exist, create it. Add your MCP server configuration:
 
 ![Claude Desktop Settings](images/claude-desktop-settings.png)
 
-- Try various prompts listed at the end of this page
+- Try some of the [example prompts](#example-prompts) listed at the end of this page
 
 ![Claude Desktop example prompt](images/claude-desktop-prompt.png)
 
@@ -137,13 +139,13 @@ If the file doesn't exist, create it. Add your MCP server configuration:
 Here are some example prompts you can try:
 
 ```text
-What accounts and projects do I have access to?
+What projects do I have access to?
 ```
 
 ```text
-List all *.rvt files in project XYZ
+List all *.rvt files in the project
 ```
 
 ```text
-Give me a summary of issues in project XYZ
+I've discovered a hole in the ground on a construction site. What kind of issue should I report?
 ```

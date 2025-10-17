@@ -3,7 +3,7 @@
 In this part of the tutorial you will:
 
 - Create a Secure Service Account (SSA) for your MCP server
-- Generate a private key for authentication
+- Generate a private key for programmatic authentication
 - Invite the service account to your ACC projects
 - Gather the required credentials for server configuration
 
@@ -68,27 +68,19 @@ Now you need to create a private key that your MCP server will use to authentica
 
 > Note: The key ID uniquely identifies your private key and must be included in authentication requests.
 
-## Provision Access to ACC
+## Invite Account to ACC
 
 For your service account to access ACC projects, you need to invite it as a project member.
 
-### Prerequisites
-
-Make sure you have:
-
-- [Provisioned your APS application for ACC access](https://get-started.aps.autodesk.com/#provision-access-in-other-products)
-- Admin or similar permissions in your ACC projects
-
-### Invite the Service Account to Your ACC Project
+### Add New Member
 
 - Go to [Autodesk Construction Cloud](https://acc.autodesk.com/)
 - Navigate to one of your projects
-- Go to the **Members** section
-- Click **Add Members**
+- Go to the **Members** section, and click **Add Members**
 
 ![ACC Project Members](images/acc-project-members.png)
 
-### Enter Service Account Email
+### Enter Account Details
 
 - In the invitation dialog, enter the **email** of your service account, and click **Enter**
 - Assign appropriate permissions (e.g., **Project Admin**, or more restricted roles)

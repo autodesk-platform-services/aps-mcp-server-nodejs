@@ -20,10 +20,10 @@ Instead of building custom integrations for each AI assistant (Claude, ChatGPT, 
 
 In this tutorial, you'll implement an MCP server that exposes the following tools to AI assistants:
 
-1. **get-projects** - Retrieve all ACC accounts and projects accessible to your service account
-2. **get-folder-contents** - Browse folders and files in an ACC project
-3. **get-issues** - List all issues in an ACC project
-4. **get-issue-types** - Retrieve available issue types for a project
+1. **Get Accounts & Projects** - Retrieve all ACC accounts and projects accessible to your service account
+2. **Get Folder Contents** - Browse folders and files in an ACC project
+3. **Get Issues** - List all issues in an ACC project
+4. **Get Issue Types** - Retrieve available issue types for a project
 
 These tools enable AI assistants to:
 
@@ -41,21 +41,22 @@ Before starting this tutorial, you should have:
   - See how to [create an app](https://aps.autodesk.com/en/docs/oauth/v2/tutorials/create-app)
 - **Provisioned access to ACC** for your APS application
   - Follow the [provisioning guide](https://get-started.aps.autodesk.com/#provision-access-in-other-products)
+- Admin or similar permissions in your ACC projects
 - Basic knowledge of JavaScript/Node.js
-- An AI client that supports MCP (we'll test with Claude Desktop and VS Code)
+- An AI client that supports MCP (we'll test with [Visual Studio Code](https://code.visualstudio.com/)/[GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup), [Cursor](https://cursor.com), and [Claude Desktop](https://claude.ai/download))
 
 ## Tutorial Structure
 
 This tutorial is divided into four parts:
 
-1. **Prerequisites** - Set up your Secure Service Account and prepare your environment
+1. **Prepare Service Account** - Set up your Secure Service Account and prepare your environment
 2. **Create MCP Server** - Build the MCP server using Node.js
 3. **Create MCP Tools** - Implement the tools to interact with ACC data
-4. **Integrate with MCP Clients** - Test your MCP server with AI clients like Claude Desktop and VS Code
+4. **Integrate with MCP Clients** - Setup and test your MCP server with various AI clients
 
 ## Additional Links
 
 - [Code Repository](https://github.com/autodesk-platform-services/aps-mcp-server-nodejs)
-- [Model Context Protocol Documentation](https://modelcontextprotocol.io)
 - [Autodesk Platform Services](https://aps.autodesk.com)
 - [Secure Service Account Documentation](https://aps.autodesk.com/en/docs/ssa/v1/developers_guide/overview/)
+- [Model Context Protocol Documentation](https://modelcontextprotocol.io)

@@ -3,8 +3,8 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import * as tools from "./tools/index.js";
 
 const server = new McpServer({ name: "aps-mcp-server-nodejs", version: "0.0.1" });
-for (const tool of Object.values(tools)) {
-    server.tool(tool.title, tool.description, tool.schema, tool.callback);
+for (const [name, { title, description, inputSchema, callback }] of Object.entries(tools)) {
+    server.registerTool(name, { title, description, inputSchema }, callback);
 }
 
 try {

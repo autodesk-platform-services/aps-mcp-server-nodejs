@@ -13,16 +13,6 @@ In this part of the tutorial you will:
 
 Let's start by creating a new Node.js project.
 
-### Prerequisites
-
-Make sure you have Node.js version 16 or higher by running the following command in your terminal:
-
-```bash
-node --version
-```
-
-If you need to install Node.js, download it from [nodejs.org](https://nodejs.org).
-
 ### Initialize Node.js Project
 
 Create a new folder for your project with a `package.json` file with the following content:
@@ -33,9 +23,6 @@ Create a new folder for your project with a `package.json` file with the followi
   "version": "0.0.1",
   "type": "module",
   "private": true,
-  "scripts": {
-    "inspect": "mcp-inspector node ./server.js"
-  },
   "dependencies": {
     "@aps_sdk/construction-issues": "^1.1.0",
     "@aps_sdk/data-management": "^1.1.2",
@@ -43,9 +30,6 @@ Create a new folder for your project with a `package.json` file with the followi
     "dotenv": "^17.2.3",
     "jsonwebtoken": "^9.0.2",
     "zod": "^3.24.2"
-  },
-  "devDependencies": {
-    "@modelcontextprotocol/inspector": "^0.17.1"
   }
 }
 ```
@@ -58,9 +42,8 @@ Note the various dependencies:
 - **dotenv** - Environment variable management
 - **jsonwebtoken** - JWT token generation for SSA authentication
 - **zod** - Schema validation
-- **@modelcontextprotocol/inspector** - Development tool for testing MCP servers
 
-Next, navigate to your project folder in terminal, and install these dependencies:
+Next, navigate to your project folder in terminal, and install the dependencies:
 
 ```bash
 npm install
@@ -132,7 +115,7 @@ This module:
 
 ## Build Shared Logic
 
-Next, let's implement the shared logic for MCP tools that we will define in [Part 3](../part3-mcp-tools/).
+Next, let's implement a shared logic that will be used by all MCP tools we will build in [Part 3](../part3-mcp-tools/index.md).
 
 ### Create Common Utilities
 
@@ -198,8 +181,8 @@ export const issuesClient = new IssuesClient({ authenticationProvider: serviceAc
 
 This module:
 
-- Creates JWT tokens using your service account credentials
-- Exchanges JWT for an access token
+- Creates JWT assertion using your service account credentials
+- Exchanges JWT assertion for an access token
 - Exports authenticated API clients for APS services
 
 ### Create Tool Index
@@ -220,8 +203,8 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import * as tools from "./tools/index.js";
 
 const server = new McpServer({ name: "aps-mcp-server-nodejs", version: "0.0.1" });
-for (const tool of Object.values(tools)) {
-    server.tool(tool.title, tool.description, tool.schema, tool.callback);
+for (const [name, { title, description, inputSchema, callback }] of Object.entries(tools)) {
+    server.registerTool(name, { title, description, inputSchema }, callback);
 }
 
 try {
@@ -265,6 +248,6 @@ After that, click the **Connect** button.
 
 ![MCP Inspector](images/mcp-inspector-connect.png)
 
-The status under the **Connect** button should show a small green circle followed by **Connected**, and the main page should contain a message saying **The connected server does not support any MCP capabilities**. This is expected - we have not implemented any capabilities in our MCP server yet, but we know we can connect to it.
+The status under the **Connect** button should now say **Connected**, and the main page should contain a message saying **The connected server does not support any MCP capabilities**. This is expected - we have not implemented any capabilities in our MCP server yet, but we know we can connect to it.
 
 ![MCP Inspector Connected](images/mcp-inspector-connected.png)

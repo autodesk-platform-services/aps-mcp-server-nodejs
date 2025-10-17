@@ -1,4 +1,4 @@
-export { getProjects } from "./get-projects.js";
-export { getFolderContents } from "./get-folder-contents.js";
-export { getIssues } from "./get-issues.js";
-export { getIssueTypes } from "./get-issue-types.js";
+export { getProjectsTool } from "./get-projects.js";
+export { getFolderContentsTool } from "./get-folder-contents.js";
+export { getIssuesTool } from "./get-issues.js";
+export { getIssueTypesTool } from "./get-issue-types.js";
