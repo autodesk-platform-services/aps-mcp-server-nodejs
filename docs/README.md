@@ -1,22 +1,37 @@
 # Tutorial
 
-This tutorial guides you through the process of implementing and testing a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server for [Autodesk Platform Services](https://aps.autodesk.com). By the end of the tutorial, you'll have a fully functioning MCP server that provides AI assistants with access to Autodesk Construction Cloud (ACC) data, including projects, folders, files, and issues.
+This tutorial guides you through the process of implementing a simple [Model Context Protocol](https://modelcontextprotocol.io) server providing AI assistants with access to [Autodesk Construction Cloud](https://construction.autodesk.com) data such as documents and issues. The implementation leverages [Autodesk Platform Services](https://aps.autodesk.com), using [Data Management API](https://aps.autodesk.com/en/docs/data/v2/developers_guide/overview/) and [Autodesk Construction Cloud API](https://aps.autodesk.com/en/docs/acc/v1/overview/introduction/) for accessing the data, and [Secure Service Accounts API](https://aps.autodesk.com/en/docs/ssa/v1/developers_guide/overview/) for authentication.
 
 ![Screenshot](screenshot.png)
 
 > Tip: if you don't want to build the project from scratch, the complete implementation is available on GitHub: [https://github.com/autodesk-platform-services/aps-mcp-server-nodejs](https://github.com/autodesk-platform-services/aps-mcp-server-nodejs).
 
-## What is the Model Context Protocol?
+## Terminology
 
-The [Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open protocol that standardizes how applications provide context to Large Language Models (LLMs). Think of MCP like a USB-C port for AI applications - it provides a standardized way to connect AI models to different data sources and tools.
+### Model Context Protocol
+
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open protocol that standardizes how applications provide context to Large Language Models (LLMs). Think of MCP like a USB-C port for AI applications - it provides a standardized way to connect AI models to different data sources and tools.
+
+**MCP Servers** are applications that implement the MCP protocol to expose data and functionality to AI assistants. They act as bridges between AI models and external systems, running in the background and responding to requests from MCP clients.
+
+**MCP Tools** are specific functions that an MCP server exposes to AI assistants. These tools allow the AI to perform actions like retrieving data, executing commands, or interacting with external APIs. Each tool has a defined schema that describes its parameters and expected behavior.
+
+### Autodesk Platform Services
+
+[Autodesk Platform Services (APS)](https://aps.autodesk.com) is a collection of web services that enable developers to build applications that interact with Autodesk products and services. In this tutorial, you'll use APS to access data from [Autodesk Construction Cloud (ACC)](https://construction.autodesk.com) projects.
+
+### Secure Service Accounts
+
+[Secure Service Account (SSA)](https://aps.autodesk.com/en/docs/ssa/v1/developers_guide/overview/) is a special type of account designed for server-to-server authentication with Autodesk Platform Services. Unlike traditional OAuth which requires user interaction, SSA uses public/private key cryptography to authenticate programmatically.
+
+Key benefits:
+
+- **No user interaction required** - Perfect for automated systems and AI assistants
+- **Granular permissions** - Control exactly what the service account can access
+- **Audit trail** - Track all actions performed by the service account
+- **Secure** - Uses industry-standard JWT tokens with private key signing
 
 ## What You'll Build
-
-Instead of building custom integrations for each AI assistant (Claude, ChatGPT, etc.), you can build one MCP server that works with any MCP-compatible client. This server can then provide the AI with access to:
-
-- **Resources**: Files, database records, or any other data
-- **Tools**: Functions the AI can call to perform actions
-- **Prompts**: Pre-written templates to guide AI interactions
 
 In this tutorial, you'll implement an MCP server that exposes the following tools to AI assistants:
 
@@ -43,7 +58,10 @@ Before starting this tutorial, you should have:
   - Follow the [provisioning guide](https://get-started.aps.autodesk.com/#provision-access-in-other-products)
 - Admin or similar permissions in your ACC projects
 - Basic knowledge of JavaScript/Node.js
-- An AI client that supports MCP (we'll test with [Visual Studio Code](https://code.visualstudio.com/)/[GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup), [Cursor](https://cursor.com), and [Claude Desktop](https://claude.ai/download))
+- An AI client that supports MCP; in this tutorial we will be using the following:
+  - [Visual Studio Code](https://code.visualstudio.com/) with [GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup)
+  - [Cursor](https://cursor.com)
+  - [Claude Desktop](https://claude.ai/download))
 
 ## Tutorial Structure
 

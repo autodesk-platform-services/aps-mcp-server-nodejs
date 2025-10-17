@@ -12,11 +12,6 @@ We'll cover integration with:
 
 GitHub Copilot in VS Code supports MCP servers, allowing you to extend Copilot's capabilities with custom tools and context.
 
-### Visual Studio Code Prerequisites
-
-- [Visual Studio Code](https://code.visualstudio.com/)
-- Access to [GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup)
-
 ### Configure MCP Server in Visual Studio Code
 
 - Make sure you have [enabled MCP servers in Visual Studio Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_enable-mcp-support-in-vs-code)
@@ -54,10 +49,6 @@ GitHub Copilot in VS Code supports MCP servers, allowing you to extend Copilot's
 
 Cursor is an AI-first code editor built on VS Code with enhanced AI capabilities and native MCP support.
 
-### Cursor Prerequisites
-
-- [Cursor](https://cursor.sh/)
-
 ### Configure MCP Server in Cursor
 
 Cursor uses a similar configuration approach to VS Code but with its own settings file.
@@ -92,10 +83,6 @@ Cursor uses a similar configuration approach to VS Code but with its own setting
 ## Claude Desktop
 
 Claude Desktop is Anthropic's official desktop application for interacting with Claude AI, with built-in MCP support.
-
-### Claude Desktop Prerequisites
-
-- [Claude Desktop](https://claude.ai/download) installed
 
 ### Configure MCP Server in Claude Desktop
 

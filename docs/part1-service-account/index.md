@@ -2,23 +2,12 @@
 
 In this part of the tutorial you will:
 
-- Create a Secure Service Account (SSA) for your MCP server
+- Create a Secure Service Account for your MCP server
 - Generate a private key for programmatic authentication
 - Invite the service account to your ACC projects
 - Gather the required credentials for server configuration
 
 ## Create a Secure Service Account
-
-> ### What is a Secure Service Account?
->
-> A Secure Service Account (SSA) is a special type of account designed for server-to-server authentication with Autodesk Platform Services. Unlike traditional OAuth which requires user interaction, SSA uses public/private key cryptography to authenticate programmatically.
->
-> Key benefits:
->
-> - **No user interaction required** - Perfect for automated systems and AI assistants
-> - **Granular permissions** - Control exactly what the service account can access
-> - **Audit trail** - Track all actions performed by the service account
-> - **Secure** - Uses industry-standard JWT tokens with private key signing
 
 While you would typically implement the management of service accounts yourself using the [API](https://aps.autodesk.com/en/docs/ssa/v1/reference/http/), in this tutorial we'll use the [SSA Manager](https://ssa-manager.autodesk.io) demo application to quickly create a test account.
 
@@ -40,11 +29,9 @@ While you would typically implement the management of service accounts yourself 
 ### Note Your Service Account Details
 
 - Make sure the new account is selected in the **Accounts** list
-- Under **Account Details**, make note of the **serviceAccountId** and **email** values
+- Under **Account Details**, make note of the `serviceAccountId` and `email` values as you'll need them later
 
 ![Service Account Details](images/service-account-details.png)
-
-> Save these values for later - you'll need them for server configuration and ACC invitation.
 
 ## Generate a Private Key
 
@@ -62,7 +49,7 @@ Now you need to create a private key that your MCP server will use to authentica
 ### Note Your Key Details
 
 - Make sure the new key is selected in the **Keys** list
-- Under **Key Details**, make note of the **kid** (private key ID) value
+- Under **Key Details**, make note of the `kid` (private key ID) value
 
 ![Key Details](images/key-details.png)
 
@@ -70,19 +57,18 @@ Now you need to create a private key that your MCP server will use to authentica
 
 ## Invite Account to ACC
 
-For your service account to access ACC projects, you need to invite it as a project member.
+For your service account to have access to ACC projects, you need to invite it as a project member.
 
 ### Add New Member
 
-- Go to [Autodesk Construction Cloud](https://acc.autodesk.com/)
-- Navigate to one of your projects
+- Go to one of your ACC projects
 - Go to the **Members** section, and click **Add Members**
 
 ![ACC Project Members](images/acc-project-members.png)
 
-### Enter Account Details
+### Enter Member Details
 
-- In the invitation dialog, enter the **email** of your service account, and click **Enter**
+- In the invitation dialog, enter the `email` of your service account, and click **Enter**
 - Assign appropriate permissions (e.g., **Project Admin**, or more restricted roles)
 - Click **Send invitations**
 
@@ -103,6 +89,8 @@ For your service account to access ACC projects, you need to invite it as a proj
 
 ![Add Folder Permissions](images/add-folder-permissions.png)
 
+- Repeat this process for any other folders you want your MCP server to access
+
 ## Gather Your Credentials
 
 Before moving to the next part, make sure you have collected all the required information:
@@ -111,26 +99,4 @@ Before moving to the next part, make sure you have collected all the required in
 - **APS_CLIENT_SECRET** - Your APS application client secret
 - **SSA_ID** - Your service account ID
 - **SSA_KEY_ID** - Your private key ID
-- **SSA_KEY_PATH** - Full path to your downloaded .pem file, for example, `/Users/username/Downloads/8a4ee790-3378-44f3-bbab-5acb35ec35ce.pem`
-
-> Important: Keep these credentials secure. You'll use them to configure the MCP server in the next part.
-
-## Troubleshooting
-
-### Can't access SSA Manager
-
-- Verify your APS application is of type **Server-to-Server**
-  - Check at [https://aps.autodesk.com/myapps](https://aps.autodesk.com/myapps)
-- Ensure you're using the correct client ID and secret
-
-### Service account not appearing in ACC
-
-- Make sure you've [provisioned your APS application for ACC access](https://get-started.aps.autodesk.com/#provision-access-in-other-products)
-- Verify you used the exact email address from the SSA Manager
-- Check that you have admin permissions in the ACC project
-
-### Downloaded .pem file is missing
-
-- Check your browser's download folder
-- Some browsers may ask for permission to download files
-- You can always create a new key if the file is lost
+- **SSA_KEY_PATH** - Full path to your downloaded .pem file, for example, `/Users/brozp/Downloads/8a4ee790-3378-44f3-bbab-5acb35ec35ce.pem`

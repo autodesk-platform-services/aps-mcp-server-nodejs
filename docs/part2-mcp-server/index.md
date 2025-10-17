@@ -40,7 +40,7 @@ Note the various dependencies:
 - **@aps_sdk/data-management** - APS Data Management API client
 - **@aps_sdk/construction-issues** - ACC Issues API client
 - **dotenv** - Environment variable management
-- **jsonwebtoken** - JWT token generation for SSA authentication
+- **jsonwebtoken** - JSON web token (JWT) generation for SSA authentication
 - **zod** - Schema validation
 
 Next, navigate to your project folder in terminal, and install the dependencies:
@@ -61,7 +61,7 @@ node_modules/
 
 This ensures your credentials and private keys stay secure.
 
-## Implement Configuration Management
+## Configuration Management
 
 Next, let's create a configuration module to load and validate environment variables.
 
@@ -113,7 +113,7 @@ This module:
 - Exits with an error if any credentials are missing
 - Exports configuration for use by other modules
 
-## Build Shared Logic
+## Shared Logic
 
 Next, let's implement a shared logic that will be used by all MCP tools we will build in [Part 3](../part3-mcp-tools/index.md).
 
@@ -217,8 +217,8 @@ try {
 This code:
 
 - Creates an MCP server instance
-- Iterates through all exported tools and registers them
-- Connects to stdio transport for communication with MCP clients
+- Iterates through all tools and registers them
+- Connects to [stdio](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio) transport for communication with MCP clients
 
 ## Try it out
 
@@ -226,7 +226,7 @@ Before we start implementing individual MCP tools, let's make sure that our serv
 
 ### Start MCP Inspector
 
-Open the terminal in your project folder, and run the following command to download and run the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector):
+Open the terminal in your project folder, and start the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector):
 
 ```bash
 npx @modelcontextprotocol/inspector
@@ -248,6 +248,6 @@ After that, click the **Connect** button.
 
 ![MCP Inspector](images/mcp-inspector-connect.png)
 
-The status under the **Connect** button should now say **Connected**, and the main page should contain a message saying **The connected server does not support any MCP capabilities**. This is expected - we have not implemented any capabilities in our MCP server yet, but we know we can connect to it.
+The status under the **Connect** button should now say **Connected**, and the main page should contain a message saying **The connected server does not support any MCP capabilities**. This is expected - we have not implemented any capabilities in our MCP server yet but we've confirmed that we can connect to it.
 
 ![MCP Inspector Connected](images/mcp-inspector-connected.png)

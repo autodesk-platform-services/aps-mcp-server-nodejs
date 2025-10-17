@@ -2,11 +2,11 @@
 
 In this part of the tutorial you will implement individual tools for our MCP server, and test them out.
 
-## Get Accounts & Projects
+## Get Projects
 
-First, we will implement the **Get Accounts & Projects** tool. This tool will return a list of hubs and projects the service account has access to.
+First, we will implement the **Get Projects** tool. This tool will return a list of accounts and projects the service account has access to.
 
-### Implement Get Accounts & Projects Tool
+### Implement Get Projects Tool
 
 Create `tools/get-projects.js` with the following code:
 
@@ -45,9 +45,9 @@ The `getProjectsTool` object specifies several fields that will be used to regis
 - **inputSchema** - The schema of input parameters (empty in this case)
 - **callback** - The function that will be executed when the tool is invoked; in this case it retrieves the list of ACC hubs and projects
 
-> Note: The callback function returns an object with two fields: `content` and `structuredContent`. The `content` field is required, and it contains a human-readable text output. The `structuredContent` field is optional, and it contains a structured JSON representation of the data. This allows the tool to provide both a readable summary and a machine-readable format.
+> Note: The callback function returns an object with two fields: `content` and `structuredContent`. The `content` field is required, and it contains a human-readable text output. The `structuredContent` field is optional, and it contains a structured JSON representation of the data. This allows the tool to provide both a readable summary and a machine-readable format for MCP clients that support it.
 
-### Add Get Accounts & Projects Tool to Index
+### Add Get Projects Tool to Index
 
 Add the following line of code to the end of `tools/index.js`:
 
@@ -235,7 +235,7 @@ As a result, the UI should list tools such as `getProjectsTool` or `getIssuesToo
 
 ![MCP Inspector - List Tools Result](images/mcp-inspector-list-tools-result.png)
 
-### Test Get Accounts & Projects Tool
+### Test Get Projects Tool
 
 Now, let's try the tool for listing ACC hubs that our service account has access to. Select the **getProjectsTool** tool, and click **Run Tool**.
 
